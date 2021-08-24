@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main >
-        메인 페이지
+        메인 페이지 수정 ver.1
       </main>
 
       <footer >
