@@ -13,7 +13,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main >
-        메인 페이지 수정 ver.1
+        앞으로 여기다가 계속 올릴거에요.
+        푸시앱 떡상 가즈아!!
       </main>
 
       <footer >
