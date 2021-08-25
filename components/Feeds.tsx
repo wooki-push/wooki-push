@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { IFeed, ITag } from "../types";
 import Tags from "./Tags";
 import Profile from "./Profile";
-import Image from "next/image";
 import FeedContent from "./FeedContent";
 const FeedsContainer = styled.ul`
   display: flex;
@@ -24,18 +23,18 @@ const TradeButton = styled.button`
   border: 0;
   margin-top: 20px;
   background: #111;
-  border-sizing:border-box;
+  border-sizing: border-box;
   padding: 10px 0;
-  display:block;
-  text-align:center;
+  display: block;
+  text-align: center;
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
   color: #fff;
   border-radius: 5px;
   transition: all 1s;
-  cursor:pointer;
-  :hover{
+  cursor: pointer;
+  :hover {
     background: #777;
   }
 `;

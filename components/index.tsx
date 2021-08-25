@@ -1,2 +1,2 @@
-import Feeds from "./feeds";
-export default Feeds;
+import Feeds from "./Feeds";
+export {Feeds};
