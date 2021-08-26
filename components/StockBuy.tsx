@@ -183,7 +183,7 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
         <dd>
           <MarketPrice>시장가</MarketPrice>
           <div>
-            <StockInput type="number" value={stock} onChange={onChange} />
+            <StockInput type="tel" value={stock} onChange={onChange} />
           </div>
           <TotalTradeContainer>
             <dt>총 구매금액</dt>

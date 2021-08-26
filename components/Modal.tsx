@@ -14,10 +14,10 @@ const ModalContainer = styled.section<{ isOpen: Boolean }>`
 const ModalContents = styled.div`
   position: absolute;
   z-index: 200;
-  width: 80%;
-  height: calc(100% - 85px);
-  left: 10vw;
-  bottom: 0;
+  width: 90%;
+  height: calc(80vh);
+  left: 5vw;
+  top: 10vh;
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
