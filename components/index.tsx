@@ -1,2 +1,4 @@
 import Feeds from "./Feeds";
-export {Feeds};
+import Modal from "./Modal";
+export { Modal };
+export { Feeds };

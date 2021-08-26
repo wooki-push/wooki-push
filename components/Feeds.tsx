@@ -18,14 +18,18 @@ const FeedContainer = styled.li`
   padding: 30px;
 `;
 
-const TradeButton = styled.button`
-  width: 100%;
-  border: 0;
+const TradeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 20px;
-  background: #111;
-  border-sizing: border-box;
+`;
+const TradeButton = styled.button<{ tradeType: "buy" | "sell" }>`
+  border: 0;
+  width: 48%;
+  background: ${(props) => (props.tradeType === "buy" ? "#111" : "#777")};
+  box-sizing: border-box;
   padding: 10px 0;
-  display: block;
   text-align: center;
   font-size: 18px;
   line-height: 24px;
@@ -91,7 +95,7 @@ const feedsData: IFeed[] = [
   },
 ];
 
-const Feeds = () => {
+const Feeds = ({modalOpen}) => {
   const listItems = feedsData.map((feed, key) => (
     <FeedContainer key={key}>
       <Profile
@@ -106,7 +110,10 @@ const Feeds = () => {
         contents={feed.contents}
         thumbnail={feed.thumbnail}
       />
-      <TradeButton>매매하기</TradeButton>
+      <TradeContainer>
+        <TradeButton tradeType="sell" onClick={()=>modalOpen(true)}>판매하기</TradeButton>
+        <TradeButton tradeType="buy" onClick={()=>modalOpen(true)}>구매하기</TradeButton>
+      </TradeContainer>
     </FeedContainer>
   ));
 
