@@ -144,16 +144,30 @@ const TotalPossiblePriceText = styled.span`
 `;
 
 const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
+  const defaultPrice = 146500;
+  const defaultTotalPrice = 21000991;
   const [stock, setStock] = useState<number>(1);
+  const [totalPrice, setTotalPrice] = useState<number>(defaultTotalPrice);
+  const [price, setPrice] = useState<number>(defaultPrice);
 
   const Buy = () => {
     alert("구매가 완료되었습니다.");
     modalOpen(false);
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = e.target.value === "" ? 0 : parseFloat(e.target.value);
-    setStock(count);
+    const count = e.target.value === "" ? 1 : parseFloat(e.target.value);
+    if (count * stock <= defaultTotalPrice) {
+      setStock(count);
+    }
   };
+
+  const numberFormat = (price: number) => {
+    let result = new Intl.NumberFormat().format(price);
+    return result;
+  };
+  useEffect(() => {
+    setPrice(stock * defaultPrice);
+  }, [stock]);
 
   return (
     <StockContainer>
@@ -178,9 +192,9 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
           <TotalTradeContainer>
             <dt>총 구매금액</dt>
             <dd>
-              <TotalPriceText>146,500원</TotalPriceText>
+              <TotalPriceText>{numberFormat(price)}원</TotalPriceText>
               <TotalPossiblePriceText>
-                투자가능금액 <b>21,000,991원</b>
+                투자가능금액 <b>{numberFormat(totalPrice)}원</b>
               </TotalPossiblePriceText>
             </dd>
           </TotalTradeContainer>
