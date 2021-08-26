@@ -21,7 +21,6 @@ const StockContainer = styled.div`
 `;
 const StockHeader = styled.div`
   position: relative;
-  margin-top: 32px;
   padding: 8px 0;
   display: flex;
   flex-direction: row;
@@ -29,7 +28,7 @@ const StockHeader = styled.div`
 const StockInformation = styled.figure`
   display: flex;
   flex: 1;
-  align-items:center;
+  align-items: center;
   img {
     width: 24px;
     height: 24px;
@@ -48,7 +47,7 @@ const ExitButton = styled.button`
   border: 0;
   width: 32px;
   height: 32px;
-  background: url('/button/close.png') no-repeat 0px;
+  background: url("/button/close.png") no-repeat 0px;
   /* background-size: 32px 32px; */
 `;
 const StockTitle = styled.dt`
@@ -102,6 +101,7 @@ const StockInput = styled.input`
   border: 2px solid #f6f6f6;
   font-size: 13px;
   line-height: 18px;
+  -webkit-appearance: none;
   /* :after {
     content: "주";
     width: 10px;
@@ -162,7 +162,8 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
     modalOpen(false);
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStock(parseFloat(e.target.value));
+    const count = e.target.value === "" ? 0 : parseFloat(e.target.value);
+    setStock(count);
   };
 
   return (

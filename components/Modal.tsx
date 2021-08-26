@@ -17,7 +17,7 @@ const ModalContents = styled.div`
   width: 90%;
   height: calc(80vh);
   left: 5vw;
-  top: 10vh;
+  top: 5vh;
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
