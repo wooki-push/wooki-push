@@ -10,6 +10,7 @@ const FeedsContainer = styled.ul`
   max-width: 720px;
   background: #e5e5e5;
   box-sizing: border-box;
+  margin:0 auto;
 `;
 
 const FeedContainer = styled.li`
@@ -51,8 +52,8 @@ const feedsData: IFeed[] = [
     dueDate: "D-14",
     profileImage: "profile_1.svg",
     thumbnail: "graph_1.png",
-    stockName: "LG전자",
-    title: "엘지전자의 반란 언제까지 이어지나",
+    stockName: "카카오",
+    title: "카카오의 반란 언제까지 이어지나",
     contents:
       "130년전 전통의고품격 기계식 시계 브랜드 잉거솔이 에리스골드의 한국 공식수입유통사 워닝월렛을 통해 한국 시장에 상륙했다. 워닝워닝1892년 뉴욕...",
     tags: [
@@ -84,8 +85,8 @@ const feedsData: IFeed[] = [
     dueDate: "D-50",
     profileImage: "profile_3.svg",
     thumbnail: "graph_2.png",
-    stockName: "삼성전자",
-    title: "삼성디스플레이 노조, 창사 후 첫 파업 예고",
+    stockName: "카카오",
+    title: "카카오 노조, 창사 후 첫 파업 예고",
     contents:
       "130년전 전통의고품격 기계식 시계 브랜드 잉거솔이 에리스골드의 한국 공식수입유통사 워닝월렛을 통해 한국 시장에 상륙했다. 워닝워닝1892년 뉴욕...",
     tags: [
@@ -115,7 +116,7 @@ const Feeds: FunctionComponent<IModalOpen> = ({ modalOpen }) => {
         thumbnail={feed.thumbnail}
       />
       <TradeContainer>
-        <TradeButton tradeType="sell" onClick={() => modalOpen(true)}>
+        <TradeButton tradeType="sell" onClick={() => alert("미구현")}>
           판매하기
         </TradeButton>
         <TradeButton tradeType="buy" onClick={() => modalOpen(true)}>

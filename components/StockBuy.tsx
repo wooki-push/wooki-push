@@ -99,20 +99,9 @@ const StockInput = styled.input`
   display: block;
   width: 100%;
   border: 2px solid #f6f6f6;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 18px;
   -webkit-appearance: none;
-  /* :after {
-    content: "주";
-    width: 10px;
-    height: 10px;
-    background: red;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    font-size: 19px;
-  } */
 `;
 const TotalTradeContainer = styled.dl`
   position: absolute;
@@ -191,7 +180,7 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
             <dd>
               <TotalPriceText>146,500원</TotalPriceText>
               <TotalPossiblePriceText>
-                투자가능금액<b>21,000,991원</b>
+                투자가능금액 <b>21,000,991원</b>
               </TotalPossiblePriceText>
             </dd>
           </TotalTradeContainer>
