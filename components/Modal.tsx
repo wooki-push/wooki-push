@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { FunctionComponent } from "react";
 import StockBuy from "./StockBuy";
+import { IModal } from "../types";
 const ModalContainer = styled.section<{ isOpen: Boolean }>`
   position: fixed;
   width: 100vw;
@@ -14,7 +15,7 @@ const ModalContents = styled.div`
   position: absolute;
   z-index: 200;
   width: 80%;
-  height: 90%;
+  height: calc(100% - 85px);
   left: 10vw;
   bottom: 0;
   background: #fff;
@@ -46,17 +47,11 @@ const Contents = styled.div`
   color: #333333;
 `;
 
-interface IModal {
-  isOpen: Boolean;
-  modalOpen(type: Boolean): void;
-  contents: string;
-}
-
 const Modal: FunctionComponent<IModal> = ({ isOpen, contents, modalOpen }) => {
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalContents>
-        <StockBuy />
+        <StockBuy isOpen={isOpen} modalOpen={modalOpen} />
       </ModalContents>
       <ModalBackground onClick={() => modalOpen(false)}></ModalBackground>
     </ModalContainer>

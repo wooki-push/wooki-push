@@ -10,7 +10,7 @@ export interface IFeed {
   tags: ITag[];
 }
 
-export interface ITag{
+export interface ITag {
   name: string;
   color?: string;
 }
@@ -43,4 +43,10 @@ export interface ITrade {
   count: number;
   increment: () => number;
   type: "limitOrder" | "marketOrder";
+}
+
+export interface IModal {
+  isOpen: Boolean;
+  modalOpen(type: Boolean): void;
+  contents?: string;
 }
