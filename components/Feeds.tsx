@@ -3,6 +3,7 @@ import { IFeed, ITag } from "../types";
 import Tags from "./Tags";
 import Profile from "./Profile";
 import FeedContent from "./FeedContent";
+import { FunctionComponent } from "react";
 const FeedsContainer = styled.ul`
   display: flex;
   flex-direction: column;
@@ -95,7 +96,10 @@ const feedsData: IFeed[] = [
   },
 ];
 
-const Feeds = ({modalOpen}) => {
+interface IModalOpen {
+  modalOpen(s: boolean): void;
+}
+const Feeds: FunctionComponent<IModalOpen> = ({ modalOpen }) => {
   const listItems = feedsData.map((feed, key) => (
     <FeedContainer key={key}>
       <Profile
@@ -111,8 +115,12 @@ const Feeds = ({modalOpen}) => {
         thumbnail={feed.thumbnail}
       />
       <TradeContainer>
-        <TradeButton tradeType="sell" onClick={()=>modalOpen(true)}>판매하기</TradeButton>
-        <TradeButton tradeType="buy" onClick={()=>modalOpen(true)}>구매하기</TradeButton>
+        <TradeButton tradeType="sell" onClick={() => modalOpen(true)}>
+          판매하기
+        </TradeButton>
+        <TradeButton tradeType="buy" onClick={() => modalOpen(true)}>
+          구매하기
+        </TradeButton>
       </TradeContainer>
     </FeedContainer>
   ));

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { FunctionComponent } from "react";
 import StockBuy from "./StockBuy";
 const ModalContainer = styled.section<{ isOpen: Boolean }>`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   z-index: 100;
