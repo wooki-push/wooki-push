@@ -151,7 +151,12 @@ const MaxStock = styled.span`
   border-radius: 3px;
   padding: 4px 5px;
   display: inline-block;
-  margin-top: 10px;
+  margin: 10px 10px 0 0;
+  border: 0;
+`;
+const MyHolding = styled(MaxStock)`
+  color: #ff3535;
+  background: rgba(255, 53, 53, 0.05);
 `;
 const defaultPrice = 149500;
 const defaultTotalPrice = 21000991;
@@ -171,6 +176,12 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
     if (user.totalPrice - price < 0) {
       return alert("구매가 불가합니다");
     }
+    let calcStock = 0;
+    if (user.stockHolding.length > 0) {
+      calcStock = stock + user.stockHolding[0].holding;
+    } else {
+      calcStock = stock;
+    }
     const myStock: IMyStock = {
       stock: {
         xid: 356789,
@@ -178,7 +189,7 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
         thumbnal: "kakao.svg",
         price: defaultPrice,
       },
-      holding: stock,
+      holding: calcStock,
     };
     user.stockHolding = [myStock];
     user.totalPrice = user.totalPrice - price;
@@ -241,6 +252,13 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
             <MaxStock>
               최대가능 <b>{maxStock}주</b>
             </MaxStock>
+            {user.stockHolding.length > 0 ? (
+              <MyHolding>
+                보유주식 <b>{user.stockHolding[0].holding}주</b>
+              </MyHolding>
+            ) : (
+              ""
+            )}
           </div>
           <TotalTradeContainer>
             <dt>총 구매금액</dt>
