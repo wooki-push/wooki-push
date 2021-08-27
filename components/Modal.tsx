@@ -14,15 +14,21 @@ const ModalContainer = styled.section<{ isOpen: Boolean }>`
 const ModalContents = styled.div`
   position: absolute;
   z-index: 200;
-  width: 90%;
+  width: 720px;
+  /* margin:0 auto; */
   height: calc(80vh);
-  left: 5vw;
+  /* left: 5vw; */
+  left: calc((100vw - 720px) / 2);
   top: 5vh;
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  @media (max-width: 720px) {
+    max-width: 90%;
+    left: 5vw;
+  }
   /* animation: boxFade 1s 1s linear alternate;
   @keyframes boxFade {
     0% {
