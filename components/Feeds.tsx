@@ -28,7 +28,7 @@ const TradeContainer = styled.div`
 `;
 const TradeButton = styled.button<{ tradeType: "buy" | "sell" }>`
   border: 0;
-  width: 48%;
+  width: 100%;
   background: ${(props) => (props.tradeType === "buy" ? "#111" : "#777")};
   box-sizing: border-box;
   padding: 10px 0;
@@ -116,9 +116,9 @@ const Feeds: FunctionComponent<IModalOpen> = ({ modalOpen }) => {
         thumbnail={feed.thumbnail}
       />
       <TradeContainer>
-        <TradeButton tradeType="sell" onClick={() => alert("미구현")}>
+        {/* <TradeButton tradeType="sell" onClick={() => alert("미구현")}>
           판매하기
-        </TradeButton>
+        </TradeButton> */}
         <TradeButton tradeType="buy" onClick={() => modalOpen(true)}>
           구매하기
         </TradeButton>

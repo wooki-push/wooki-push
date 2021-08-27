@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import styled from "styled-components";
 import { TradeButton as TB, TradeContainer as TC } from "./TradeButton";
-import { IModal } from "../types";
+import { IModal, IMyStock, IUser } from "../types";
 
 const TradeContainer = styled(TC)`
   width: 100%;
@@ -15,6 +15,7 @@ const TradeContainer = styled(TC)`
 const TradeButton = styled(TB)`
   width: 100%;
   border-radius: 0;
+  padding: 20px 0;
 `;
 const StockContainer = styled.div`
   padding: 5px;
@@ -106,7 +107,7 @@ const StockInput = styled.input`
 const TotalTradeContainer = styled.dl`
   position: absolute;
   width: 100%;
-  bottom: 44px;
+  bottom: 64px;
   left: 0;
   display: flex;
   flex-direction: row;
@@ -142,21 +143,54 @@ const TotalPossiblePriceText = styled.span`
   color: #26be7e;
   padding-top: 5px;
 `;
+const MaxStock = styled.span`
+  color: #26be7e;
+  background: rgba(38, 190, 126, 0.1);
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 3px;
+  padding: 4px 5px;
+  display: inline-block;
+  margin-top: 10px;
+`;
+const defaultPrice = 149500;
+const defaultTotalPrice = 21000991;
 
 const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
-  const defaultPrice = 146500;
-  const defaultTotalPrice = 21000991;
   const [stock, setStock] = useState<number>(1);
-  const [totalPrice, setTotalPrice] = useState<number>(defaultTotalPrice);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [price, setPrice] = useState<number>(defaultPrice);
-
+  const [user, setUser] = useState<IUser>({
+    xid: 1,
+    name: "Pushnews",
+    stockHolding: [],
+    totalPrice: defaultTotalPrice,
+  });
+  const maxStock = Math.floor(user.totalPrice / defaultPrice);
   const Buy = () => {
+    if (user.totalPrice - price < 0) {
+      return alert("구매가 불가합니다");
+    }
+    const myStock: IMyStock = {
+      stock: {
+        xid: 356789,
+        name: "카카오",
+        thumbnal: "kakao.svg",
+        price: defaultPrice,
+      },
+      holding: stock,
+    };
+    user.stockHolding = [myStock];
+    user.totalPrice = user.totalPrice - price;
+    setUser(user);
+    setStock(1);
+    window.localStorage.setItem("pushapp", JSON.stringify(user));
     alert("구매가 완료되었습니다.");
     modalOpen(false);
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = e.target.value === "" ? 1 : parseFloat(e.target.value);
-    if (count * stock <= defaultTotalPrice) {
+    const count = e.target.value === "" ? 0 : parseFloat(e.target.value);
+    if (maxStock >= count) {
       setStock(count);
     }
   };
@@ -168,6 +202,22 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
   useEffect(() => {
     setPrice(stock * defaultPrice);
   }, [stock]);
+
+  useEffect(() => {
+    try {
+      const myStorage = window.localStorage.getItem("pushapp");
+      if (myStorage === null) {
+        window.localStorage.setItem("pushapp", JSON.stringify(user));
+      } else {
+        const myInfomation = JSON.parse(myStorage);
+        setUser(myInfomation);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    console.log("aa", window);
+  }, []);
 
   return (
     <StockContainer>
@@ -181,20 +231,23 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
       <dl>
         <StockTitle>
           <StockName>카카오</StockName>
-          <StockPrice>146,500</StockPrice>
+          <StockPrice>{numberFormat(defaultPrice)}</StockPrice>
           <StockRate>+50원 (0.15%)</StockRate>
         </StockTitle>
         <dd>
           <MarketPrice>시장가</MarketPrice>
           <div>
             <StockInput type="tel" value={stock} onChange={onChange} />
+            <MaxStock>
+              최대가능 <b>{maxStock}주</b>
+            </MaxStock>
           </div>
           <TotalTradeContainer>
             <dt>총 구매금액</dt>
             <dd>
               <TotalPriceText>{numberFormat(price)}원</TotalPriceText>
               <TotalPossiblePriceText>
-                투자가능금액 <b>{numberFormat(totalPrice)}원</b>
+                투자가능금액 <b>{numberFormat(user.totalPrice)}원</b>
               </TotalPossiblePriceText>
             </dd>
           </TotalTradeContainer>
