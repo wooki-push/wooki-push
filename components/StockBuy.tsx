@@ -173,7 +173,7 @@ const StockBuy: FunctionComponent<IModal> = ({ isOpen, modalOpen }) => {
   });
   const maxStock = Math.floor(user.totalPrice / defaultPrice);
   const Buy = () => {
-    if (user.totalPrice - price < 0) {
+    if (user.totalPrice - price < 0 || stock === 0) {
       return alert("구매가 불가합니다");
     }
     let calcStock = 0;
