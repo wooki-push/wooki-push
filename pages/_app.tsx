@@ -1,7 +1,18 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-
+import type { AppProps , AppContext } from 'next/app'
+import GlobalStyle from "../styles/GlobalStyles";
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </>
+  );
 }
-export default MyApp
+
+// MyApp.getInitialProps = async (appContext: AppContext) => {
+//   // calls page's `getInitialProps` and fills `appProps.pageProps`
+//   const appProps = await Coin.getInitialProps(appContext);
+
+//   return { ...appProps }
+// }
+export default MyApp;

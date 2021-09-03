@@ -50,3 +50,8 @@ export interface IModal {
   modalOpen(type: Boolean): void;
   contents?: string;
 }
+
+export interface ISmallGraph {
+  color: string;
+  value: number[];
+}
